@@ -98,6 +98,6 @@ def p_walk_algorithm(trip_df, threshold):
         
                 # הוספת הילדים של הצומת לתור העדיפויות אם הצומת מכוסה, 
                 for duration_range in child_relations[current_node]:
-                    heapq.heappush(priority_queue, (-priority_score(duration_range), duration_range, "hour"))
+                    heapq.heappush(priority_queue, (-priority_score(duration_range), duration_range, "duration"))
     
     return mups  # החזרת רשימת MUPs
