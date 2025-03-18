@@ -26,10 +26,11 @@ def distinct_sampler(df, columns, f, p, S):
                     reservoirs[key].append(row)
                     weights[key] = weights.get(key, []) + [1.0 / p]  # משקל 1/p
 
-    # איסוף הדגימות עם המשקלים
+     # איסוף הדגימות עם הכפלת השורות לפי המשקלים
     for key in reservoirs:
-        for i, row in enumerate(reservoirs[key]):
-            row['weight'] = weights[key][i]  # הוספת עמודת weight לרשומה
-            samples.append(row)
-    
+        weight = weights[key]  # מקבלים את המשקל של המפתח הנוכחי
+        for row in reservoirs[key]:
+            # מוסיפים את השורה מספר פעמים לפי המשקל (מעוגל למספר שלם)
+            for _ in range(int(weight)):
+                samples.append(row)
     return pd.DataFrame(samples)
